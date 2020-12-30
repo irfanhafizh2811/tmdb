@@ -1,0 +1,52 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.android.myapplication.movies.ui.detail.fragments.DetailFragmentViewModel" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_casts"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:castAdapterList="@{viewModel.movieDetails}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        <ProgressBar
+            android:id="@+id/detail_progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+
+            android:visibility="gone"
+            app:detailProgressBarVisibility="@{viewModel.movieDetails}" />
+
+        <include
+            android:id="@+id/empty_data_screen"
+            layout="@layout/emptydata_screen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            app:emptyCastVisibility="@{viewModel.movieDetails}" />
+
+        <include
+            android:id="@+id/error_screen"
+            layout="@layout/error_screen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            app:detailNetworkErrorVisibility="@{viewModel.movieDetails}" />
+
+    </FrameLayout>
+</layout>
